@@ -50,3 +50,10 @@ ORDER BY num_of_rents_june DESC;
 )
 rental_june_df.head()
 
+#Write a function that checks if customer borrowed more or less films in the month of June as compared to May.
+
+Hint: For this part, you can create a join between the two dataframes created before, using the merge function available for pandas dataframes. 
+
+may_june = rental_may.merge(rental_june, on="customer_id", how="inner")  
+may_june.head()
+
