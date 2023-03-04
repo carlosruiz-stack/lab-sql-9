@@ -30,14 +30,6 @@ data.head()
 
 #store the information separately for rentals in each month
 
-rental_may = pd.read_sql_query("SELECT customer_id, count(rental_id) AS total_rentals_per_customer FROM sakila.rental_may GROUP BY customer_id ORDER BY total_rentals_per_customer DESC", engine)
-rental_may.head()
-
-rental_june = pd.read_sql_query("SELECT customer_id, count(rental_id) AS total_rentals_per_customer FROM sakila.rental_may GROUP BY customer_id ORDER BY total_rentals_per_customer DESC", engine)
-rental_june.head() 
-
-# we compare both dataframes to check for the difference in rentals between the month of may and june:
-
 rental_may_df = pd.read_sql_query(
 """
 SELECT customer_id, COUNT(*) AS num_of_rents_may
@@ -46,5 +38,15 @@ GROUP BY customer_id
 ORDER BY num_of_rents_may DESC;
 """, engine
 )
-rental_may_df.head()
+rental_june_df.head()
+
+rental_june_df = pd.read_sql_query(
+"""
+SELECT customer_id, COUNT(*) AS num_of_rents_june
+FROM rental_june
+GROUP BY customer_id
+ORDER BY num_of_rents_june DESC;
+""", engine
+)
+rental_june_df.head()
 
