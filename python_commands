@@ -1,0 +1,40 @@
+from sqlalchemy import create_engine
+import pandas as pd
+from getpass import getpass  # To get the password without showing the input
+
+import matplotlib
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+#sns.set_theme(style="whitegrid")
+
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import plot_confusion_matrix
+from sklearn.metrics import cohen_kappa_score
+
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
+password = getpass("INSERT YOUR F*KING PASSWORD: ")
+
+#establish connection with db
+
+connection_string = 'mysql+pymysql://root:' + password + '@localhost/sakila'
+engine = create_engine(connection_string)
+
+#read the dataset
+
+data = pd.read_sql_query('SELECT * FROM sakila.rental', engine)
+data.head()
+
+#store the information separately for rentals in each month
+
+rental_may = pd.read_sql_query("SELECT customer_id, count(rental_id) AS total_rentals_per_customer FROM sakila.rental_may GROUP BY customer_id ORDER BY total_rentals_per_customer DESC", engine)
+rental_may.head()
+
+rental_june = pd.read_sql_query("SELECT customer_id, count(rental_id) AS total_rentals_per_customer FROM sakila.rental_may GROUP BY customer_id ORDER BY total_rentals_per_customer DESC", engine)
+rental_june.head() 
+
+
+
