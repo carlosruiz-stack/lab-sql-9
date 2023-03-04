@@ -1,0 +1,27 @@
+USE sakila;
+
+# Create a table rentals_may to store the data from rental table with information for the month of May | 
+Insert values in the table rentals_may using the table rental, filtering values only for the month of May.
+
+CREATE TABLE rental_may 
+SELECT * FROM rental
+WHERE rental_date LIKE "%-05-%";
+
+# Create a table rentals_may to store the data from rental table with information for the month of June | 
+Insert values in the table rentals_may using the table rental, filtering values only for the month of June.
+
+CREATE TABLE rental_june 
+SELECT * FROM rental
+WHERE rental_date LIKE "%-06-%";
+
+# Check the number of rentals for each customer for May.
+
+SELECT customer_id, count(customer_id) AS count_may
+FROM rental_may
+GROUP BY customer_id;
+
+# Check the number of rentals for each customer for June.
+
+SELECT customer_id, count(customer_id) AS count_june
+FROM rental_june
+GROUP BY customer_id;
